@@ -1,5 +1,6 @@
 package com.application.carlotaservice.saltedge;
 
+import com.application.carlotaservice.saltedge.dto.DataConnectionDTO;
 import com.application.carlotaservice.saltedge.dto.DataCustomerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Slf4j
 public class ConnectionProxy {
-  private static String CUSTOMER_URL = "https://www.saltedge.com/api/v5/connections/";
+  private static String CONNECTION_URL = "https://www.saltedge.com/api/v5/connections/";
   private RestTemplate restTemplate;
   private HttpHeaders httpHeaders;
 
@@ -34,8 +35,13 @@ public class ConnectionProxy {
   public void showConnections(String customer) {
     setHttpHeaders();
     HttpEntity entity = new HttpEntity(httpHeaders);
-    ResponseEntity<DataCustomerDTO> response =
-            restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.GET, entity, DataCustomerDTO.class);
+    ResponseEntity<DataConnectionDTO> response =
+            restTemplate.exchange(CONNECTION_URL + customer, HttpMethod.GET, entity, DataConnectionDTO.class);
     log.info(response.getBody().getData().getId());
+    log.info(response.getBody().getData().getProvider_id());
+  }
+  
+  public void removeConnection(String conection) {
+	  
   }
 }
