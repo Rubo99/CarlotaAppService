@@ -1,6 +1,6 @@
 package com.application.carlotaservice.saltedge;
 
-import com.application.carlotaservice.saltedge.dto.DataDTO;
+import com.application.carlotaservice.saltedge.dto.DataCustomerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -34,8 +34,8 @@ public class ConnectionProxy {
   public void showConnections(String customer) {
     setHttpHeaders();
     HttpEntity entity = new HttpEntity(httpHeaders);
-    ResponseEntity<DataDTO> response =
-            restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.GET, entity, DataDTO.class);
+    ResponseEntity<DataCustomerDTO> response =
+            restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.GET, entity, DataCustomerDTO.class);
     log.info(response.getBody().getData().getId());
   }
 }

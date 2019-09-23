@@ -1,7 +1,7 @@
 package com.application.carlotaservice.saltedge;
 
 import com.application.carlotaservice.saltedge.dto.CustomerDTO;
-import com.application.carlotaservice.saltedge.dto.DataDTO;
+import com.application.carlotaservice.saltedge.dto.DataCustomerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -23,8 +23,8 @@ public class UserProxy {
   public void getCustomer(String customer) {
     setHttpHeaders();
     HttpEntity entity = new HttpEntity(httpHeaders);
-    ResponseEntity<DataDTO> response =
-        restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.GET, entity, DataDTO.class);
+    ResponseEntity<DataCustomerDTO> response =
+        restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.GET, entity, DataCustomerDTO.class);
     log.info(response.getBody().getData().getId());
   }
 
@@ -42,18 +42,18 @@ public class UserProxy {
   public void createCustomer(String customer) {
     setHttpHeaders();
     CustomerDTO customerDTO = CustomerDTO.builder().identifier(customer).build();
-    DataDTO dataDTO = DataDTO.builder().data(customerDTO).build();
-    HttpEntity entity = new HttpEntity(dataDTO, httpHeaders);
-    ResponseEntity<DataDTO> response =
-        restTemplate.postForEntity(CUSTOMER_URL, entity, DataDTO.class);
+    DataCustomerDTO dataCustomerDTO = DataCustomerDTO.builder().data(customerDTO).build();
+    HttpEntity entity = new HttpEntity(dataCustomerDTO, httpHeaders);
+    ResponseEntity<DataCustomerDTO> response =
+        restTemplate.postForEntity(CUSTOMER_URL, entity, DataCustomerDTO.class);
     log.info(response.getBody().getData().getIdentifier());
   }
 
   public void removeCustomer(String customer) {
     setHttpHeaders();
     HttpEntity entity = new HttpEntity(httpHeaders);
-    ResponseEntity<DataDTO> response =
-        restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.DELETE, entity, DataDTO.class);
+    ResponseEntity<DataCustomerDTO> response =
+        restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.DELETE, entity, DataCustomerDTO.class);
     log.info("deleted" + response.getBody().getData().isDeleted());
   }
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DataDTO {
+public class DataCustomerDTO {
 
   private CustomerDTO data;
 }
