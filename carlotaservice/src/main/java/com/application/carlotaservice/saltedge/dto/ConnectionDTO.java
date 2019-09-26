@@ -1,5 +1,8 @@
 package com.application.carlotaservice.saltedge.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,44 +13,48 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor  
+@JsonIgnoreProperties(value={ "status"  }, allowSetters= true)
 public class ConnectionDTO {
-	  private String id;
+ 	  private String id;
+ 	   
+ 	  @JsonProperty("secret")
 	  private String secret;
+ 	  @JsonProperty("provider_id")
 	  private String provider_id;
+	  
 	  private String provider_code;
+	  @JsonProperty("provider_name")
 	  private String provider_name;
+	   
 	  private String customer_id;
+	  @JsonProperty("next_refresh_possible_at")
 	  private String next_refresh_possible_at;
+	  @JsonProperty("created_at")
 	  private String created_at;
+	  @JsonProperty("updated_at")
 	  private String updated_at;
+	  @JsonProperty("status")
 	  private String status;
+	  @JsonProperty("categorization")
 	  private String categorization;
+	  @JsonProperty("daily_refresh")
 	  private String daily_refresh;
+	  @JsonProperty("store_credentials")
 	  private String store_credentials;
+	  
 	  private String country_code;
+	  @JsonProperty("last_success_at")
 	  private String last_success_at;
+	  @JsonProperty("show_consent_confirmation")
 	  private String show_consent_confirmation;
+	  @JsonProperty("last_consent_id")
 	  private String last_consent_id;
+	  
+	  
+	  private boolean removed;
+	  private CredentialsDTO credentials;
+	  private AttemptDTO attempt;
+	  private ConsentDTO consent;
 }
 
-/*
-"id": "5499871",
-"secret": "AIw1wZ0dm00BmQkSH21O-44lPqYfaSEj-grSGwV7c0c",
-"provider_id": "2917",
-"provider_code": "banamex_bancanet_mx",
-"provider_name": "Banamex (Citi BancaNet)",
-"customer_id": "4516126",
-"next_refresh_possible_at": null,
-"created_at": "2019-08-01T19:54:51Z",
-"updated_at": "2019-08-01T19:56:24Z",
-"status": "active",
-"categorization": "personal",
-"daily_refresh": false,
-"store_credentials": false,
-"country_code": "MX",
-"last_success_at": "2019-08-01T19:56:24Z",
-"show_consent_confirmation": true,
-"last_consent_id": "3639199",
-
-*/
