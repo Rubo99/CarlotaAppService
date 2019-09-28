@@ -20,12 +20,14 @@ public class UserProxy {
     this.restTemplate = restTemplate;
   }
 
-  public void getCustomer(String customer) {
+  public DataCustomerDTO getCustomer(String customer) {
     setHttpHeaders();
     HttpEntity entity = new HttpEntity(httpHeaders);
     ResponseEntity<DataCustomerDTO> response =
-        restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.GET, entity, DataCustomerDTO.class);
+        restTemplate.exchange(
+            CUSTOMER_URL + customer, HttpMethod.GET, entity, DataCustomerDTO.class);
     log.info(response.getBody().getData().getId());
+    return response.getBody();
   }
 
   private void setHttpHeaders() {
@@ -53,7 +55,8 @@ public class UserProxy {
     setHttpHeaders();
     HttpEntity entity = new HttpEntity(httpHeaders);
     ResponseEntity<DataCustomerDTO> response =
-        restTemplate.exchange(CUSTOMER_URL + customer, HttpMethod.DELETE, entity, DataCustomerDTO.class);
+        restTemplate.exchange(
+            CUSTOMER_URL + customer, HttpMethod.DELETE, entity, DataCustomerDTO.class);
     log.info("deleted" + response.getBody().getData().isDeleted());
   }
 }
